@@ -10,7 +10,11 @@ package com.mycompany.recursividad;
  */
 public class Recursividad {
     
-    
+    /*
+        Este metodo lo que hace es calcular el factorial de cualquier numero
+        10! = 10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1
+        5! = 5 * 4 * 3 * 2 * 1
+    */
     public int Factorial(int numero){   //5  / 4    / 3   /2    /1    /0
         if(numero == 0){  // :D
             return 1; 
@@ -18,8 +22,10 @@ public class Recursividad {
         return numero * Factorial(numero - 1);   //5 * 24 = 120  / 4 * 6 = 24  / 3 * 2 = 6  /2 * 1 = 2   /1 * 1 = 1
     } 
     
-    
-    // 1  1  2  3  5  8  13  21 ... 
+    /*
+        Calcula el numero en la posicion indicada de la serie fibonacci
+    */
+    // ---->  1  1  2  3  5  8  13  21 ... 
     public int Fibonacci(int posicion){   // 6  / 5 / 4 / 3 / 1
         if(posicion <= 1){
             return posicion;
