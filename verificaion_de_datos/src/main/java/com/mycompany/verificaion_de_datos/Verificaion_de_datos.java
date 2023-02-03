@@ -72,7 +72,8 @@ public class Verificaion_de_datos {
             for(int contador = 0; contador < inventario.length; contador++){
                 if(inventario[contador][0] != null){
                     if(inventario[contador][0].equals(cofre[id_cofre - 1])){
-                        inventario[contador][1] = Integer.parseInt(inventario[contador][1]) + cantidad + "";                        ya_se_ha_escrito = true;
+                        inventario[contador][1] = Integer.parseInt(inventario[contador][1]) + cantidad + "";                        
+                        ya_se_ha_escrito = true;
                         break;
                     }
                 }
