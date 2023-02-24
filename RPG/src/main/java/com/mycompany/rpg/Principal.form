@@ -57,17 +57,16 @@
                               <Component id="lbl_nivel" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="btn_habilidades" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="171" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="btn_inventario" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="179" max="-2" attributes="0"/>
-                              </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace pref="207" max="-2" attributes="0"/>
                                   <Component id="btn_abrirCaja" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="btn_habilidades" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btn_inventario" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="171" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -146,16 +145,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ver inventario"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_inventarioActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_habilidades">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ver habilidades"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_habilidadesActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_abrirCaja">
       <Properties>
         <Property name="text" type="java.lang.String" value="Abrir caja"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_abrirCajaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>

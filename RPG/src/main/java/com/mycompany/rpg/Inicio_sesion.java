@@ -4,7 +4,9 @@
  */
 package com.mycompany.rpg;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import java.util.List;
 
 /**
  *
@@ -15,9 +17,22 @@ public class Inicio_sesion extends javax.swing.JFrame {
     /**
      * Creates new form Inicio_sesion
      */
+    //Variables de las clases que voy a utilizar
+    Registro rg = new Registro();
+    Principal pc = new Principal();
+    //Array de la clase usuario
+    usuario usr_array [] = new usuario[5];
+    //Tambien se puede hacer de esta forma
+    //Me permite utilizar infinitos usuarios
+    //Además posee distintos métodos ya establecidos como agregar, eliminar y buscar.
+    //Si hacemos una lista de clases entonces el buscar tendria que ser mapeado
+    List<usuario> lista_usuario = new ArrayList<usuario>();
     public Inicio_sesion() {
+        //Cargar los compontentes que se mostraran en pantalla
         initComponents();
+        //Enviar a la clase Registro esta interfaz (inicio_sesion) y el array de usuarios
         rg.cargarClase(this, usr_array);
+        //Enviar a la clase principal esta interfaz
         pc.cargarClase(this);
     }
 
@@ -101,10 +116,12 @@ public class Inicio_sesion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_iniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_iniciarActionPerformed
+        //Verificar que los campos no esten vacios
         if(txt_usuario.getText().equals("") || txt_contrasenha.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Error, usuario o contraseña no pueden estar vacios");
         } else {
             boolean existe = false;
+            //Recorrer la lista y buscar aquella con usuario y contraseña iguales
             for(int i = 0; i < usr_array.length; i++){
                 if(usr_array[i] != null){
                     if(usr_array[i].getNombre_usuario().equals(txt_usuario.getText()) && 
@@ -115,9 +132,13 @@ public class Inicio_sesion extends javax.swing.JFrame {
                     }
                 }
             }
+            //Si existe el usuario y contraseña entonces entra a la clase principal
             if(existe){
+                //Deja de pintar en pantalla esta interfaz (grafica)
                 this.setVisible(false);
+                //Pintamos en pantalla la clase principal
                 pc.setVisible(true);
+                //Ponemos en blanco los txt
                 txt_usuario.setText("");
                 txt_contrasenha.setText("");
             } else {
@@ -129,9 +150,6 @@ public class Inicio_sesion extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_iniciarActionPerformed
 
     
-    Registro rg = new Registro();
-    Principal pc = new Principal();
-    usuario usr_array [] = new usuario[5];
     
     public void actualizarUsuario(usuario usr_array []){
         this.usr_array = usr_array;

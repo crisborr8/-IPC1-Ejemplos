@@ -37,5 +37,33 @@ public class Inventario {
         this.cantidad = cantidad;
     }
     
+    //0 - 4
+    String[] comida = {"Patatas", "Fruta", "Pan", "Fresco", "Agua"};
+    String[] arma = {"Hacha", "Espada", "Escudo", "Arco", "Vara"};
+    String[] pocion = {"Curacion", "Veneno", "Fuerza", "Velocidad", "Defenza"};
     
+    public Inventario getItemAleatorio(){
+        //Tres tipos
+        int tipo = (int)(Math.random()*3 + 1);
+        //ver el indice del array de comida, arma o pocion
+        int i = (int)(Math.random()*5 + 1);
+        Inventario inv = new Inventario();
+        //Cantidad desde 1 hasta 10
+        inv.setCantidad((int)(Math.random()*10 + 1));
+        switch(tipo){
+            case 1: //Comida 1 - 5
+                inv.setTipo("Comida");
+                inv.setNombre(comida[i - 1]);
+                break;
+            case 2: //Armas 1 - 5
+                inv.setTipo("Arma");
+                inv.setNombre(arma[i - 1]);
+                break;
+            case 3: //Pocion 1 - 5
+                inv.setTipo("Pocion");
+                inv.setNombre(pocion[i - 1]);
+                break;
+        }
+        return inv;
+    }
 }

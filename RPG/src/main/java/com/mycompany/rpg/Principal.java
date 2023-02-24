@@ -4,6 +4,8 @@
  */
 package com.mycompany.rpg;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author criss
@@ -15,6 +17,10 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        vrinv = new VerInventario();
+        vrinv.setPrincipal(this);
+        hab = new Habilidades();
+        hab.setPrincipal(this);
     }
 
     /**
@@ -57,10 +63,25 @@ public class Principal extends javax.swing.JFrame {
         lbl_clase.setText("jLabel4");
 
         btn_inventario.setText("Ver inventario");
+        btn_inventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_inventarioActionPerformed(evt);
+            }
+        });
 
         btn_habilidades.setText("Ver habilidades");
+        btn_habilidades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_habilidadesActionPerformed(evt);
+            }
+        });
 
         btn_abrirCaja.setText("Abrir caja");
+        btn_abrirCaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_abrirCajaActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Nivel");
 
@@ -101,15 +122,14 @@ public class Principal extends javax.swing.JFrame {
                                 .addGap(43, 43, 43)
                                 .addComponent(lbl_nivel))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btn_habilidades)
-                                    .addGap(171, 171, 171))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btn_inventario)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btn_abrirCaja))))
+                                    .addComponent(btn_abrirCaja))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btn_habilidades)
+                                        .addComponent(btn_inventario))
+                                    .addGap(171, 171, 171))))
                         .addGap(0, 76, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -146,6 +166,8 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     Inicio_sesion is;
+    VerInventario vrinv;
+    Habilidades hab;
     usuario usr;
     public void cargarClase(Inicio_sesion is){
         this.is = is;
@@ -164,6 +186,53 @@ public class Principal extends javax.swing.JFrame {
         this.setVisible(false);
         is.setVisible(true);
     }//GEN-LAST:event_btn_cerrarActionPerformed
+
+    private void btn_inventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inventarioActionPerformed
+        this.setVisible(false);
+        vrinv.setVisible(true);
+        vrinv.setDatosEnTabla(usr);
+    }//GEN-LAST:event_btn_inventarioActionPerformed
+
+    private void btn_habilidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_habilidadesActionPerformed
+        this.setVisible(false);
+        hab.setVisible(true);
+    }//GEN-LAST:event_btn_habilidadesActionPerformed
+
+    private void btn_abrirCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_abrirCajaActionPerformed
+        //De forma aleatorea me dara ya sea un item, una habilidad o experiencia
+        //si el numero aleatoreo es 1 -> item
+        //2 -> habilidad
+        // 3 -> experiencia
+        //Generar un numero entre el 1 y el 3
+        int numero = (int)(Math.random()*3+1);
+        if(numero == 1){ //Item
+            //Generar el item
+            Inventario inv = new Inventario().getItemAleatorio();
+            //Buscar en la lista de inventario si existe
+            /*
+            for(int i = 0; i < usr.getLista_inventario().size(); i++){
+                Inventario inv_actual = usr.getLista_inventario().get(i);
+                //----
+            }*/
+            boolean existeEnInventario = false;
+            for(Inventario inv_actual : usr.getLista_inventario()){
+                if(inv_actual.getNombre().equals(inv.getNombre()) && inv_actual.getTipo().equals(inv.getTipo())){
+                    inv_actual.setCantidad(inv_actual.getCantidad() + inv.getCantidad());
+                    existeEnInventario = true;
+                    break;
+                }
+            }
+            if(!existeEnInventario){
+                usr.getLista_inventario().add(inv);
+            }
+            //Mensaje de exito
+            JOptionPane.showMessageDialog(null, "Se ha abierto un item\nSe ha agregado " + inv.getCantidad() + " de " + inv.getNombre());
+        } else if (numero == 2){
+            JOptionPane.showMessageDialog(null, "Se generaran habilidades");
+        } else {
+            JOptionPane.showMessageDialog(null, "Se generara experiencia");
+        }
+    }//GEN-LAST:event_btn_abrirCajaActionPerformed
 
     /**
      * @param args the command line arguments

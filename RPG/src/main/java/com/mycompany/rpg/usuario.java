@@ -4,6 +4,9 @@
  */
 package com.mycompany.rpg;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author criss
@@ -21,7 +24,7 @@ public class usuario {
     //Cantidad de equipo (int)
     //Nombre equipo (string)
     //Tipo equipo (string)
-    private Inventario inventario[];
+    private List<Inventario> lista_inventario = new ArrayList<Inventario>();
 
     public usuario() {
         nivel = 1;
@@ -76,6 +79,14 @@ public class usuario {
 
     public void setExp_necesaria(int exp_necesaria) {
         this.exp_necesaria = exp_necesaria;
+    }
+
+    public List<Inventario> getLista_inventario() {
+        return lista_inventario;
+    }
+
+    public void setLista_inventario(List<Inventario> lista_inventario) {
+        this.lista_inventario = lista_inventario;
     }
     
     
