@@ -56,6 +56,11 @@ public class FiltroDeFoto extends JFrame{
         3. Obtenemos la ruta del archivo
         4. Guardamos el archivo con la extencion determinada
     */
+    /*
+        Para el paso 5
+        1. Crear una lista simple circular 
+        2. Creamos una cabecera o header que nos indique donde inicia la lista
+    */
     
     private JButton btnAbrir;
     //private JButton btnFiltroBN;
@@ -63,6 +68,9 @@ public class FiltroDeFoto extends JFrame{
     private JButton btnGuardar;
     private JLabel lblImagen;
     private JComboBox<String> comboBox;
+    private ListaCircular listaCircular;
+    private JButton btnSiguienteImagen;
+    private JButton btnResetFiltro;
     
     public FiltroDeFoto(){
         setTitle("QuickPhoto");
@@ -122,6 +130,9 @@ public class FiltroDeFoto extends JFrame{
                         //Poner la imagen en el JLabel
                         lblImagen.setIcon(new ImageIcon(imagen));
                         
+                        //Insertar la imagen en la lista
+                        listaCircular.insertarImagen(new ImageIcon(imagen));
+                        
                     } catch (IOException ex) {
                         Logger.getLogger(FiltroDeFoto.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -171,6 +182,25 @@ public class FiltroDeFoto extends JFrame{
         
         comboBox = new JComboBox<>(new String[]{"Blanco y negro", "Rojo", "Azul"});
         add(comboBox);
+        
+        listaCircular = new ListaCircular();
+        btnSiguienteImagen = new JButton("Siguiente");
+        btnSiguienteImagen.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lblImagen.setIcon(listaCircular.getImagenActual());
+            }
+        });
+        add(btnSiguienteImagen);
+        
+        btnResetFiltro = new JButton("Reset");
+        btnResetFiltro.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lblImagen.setIcon(listaCircular.resetImagen());
+            }
+        });
+        add(btnResetFiltro);
     }
     
     private void filtroBN(){
@@ -201,6 +231,8 @@ public class FiltroDeFoto extends JFrame{
             }
             //Colocar la imagen con filtro en el JLabel
             lblImagen.setIcon(new ImageIcon(bufferedImage));
+            //Actualizamos el filtro de la imagen en la lista
+            listaCircular.actualizarImagen(new ImageIcon(bufferedImage));
         }
     }
     private void filtroRed(){
@@ -231,6 +263,8 @@ public class FiltroDeFoto extends JFrame{
             }
             //Colocar la imagen con filtro en el JLabel
             lblImagen.setIcon(new ImageIcon(bufferedImage));
+            //Actualizamos el filtro de la imagen en la lista
+            listaCircular.actualizarImagen(new ImageIcon(bufferedImage));
         }
     }
     private void filtroBlue(){
@@ -261,6 +295,8 @@ public class FiltroDeFoto extends JFrame{
             }
             //Colocar la imagen con filtro en el JLabel
             lblImagen.setIcon(new ImageIcon(bufferedImage));
+            //Actualizamos el filtro de la imagen en la lista
+            listaCircular.actualizarImagen(new ImageIcon(bufferedImage));
         }
     }
     
