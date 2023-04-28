@@ -70,6 +70,7 @@ public class FiltroDeFoto extends JFrame{
     private JComboBox<String> comboBox;
     private ListaCircular listaCircular;
     private JButton btnSiguienteImagen;
+    private JButton btnAnteriorImagen;
     private JButton btnResetFiltro;
     
     public FiltroDeFoto(){
@@ -188,7 +189,7 @@ public class FiltroDeFoto extends JFrame{
         btnSiguienteImagen.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                lblImagen.setIcon(listaCircular.getImagenActual());
+                lblImagen.setIcon(listaCircular.getImagenSiguiente());
             }
         });
         add(btnSiguienteImagen);
@@ -201,6 +202,15 @@ public class FiltroDeFoto extends JFrame{
             }
         });
         add(btnResetFiltro);
+        
+        btnAnteriorImagen = new JButton("Anterior");
+        btnAnteriorImagen.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lblImagen.setIcon(listaCircular.getImagenAnterior());
+            }
+        });
+        add(btnAnteriorImagen);
     }
     
     private void filtroBN(){

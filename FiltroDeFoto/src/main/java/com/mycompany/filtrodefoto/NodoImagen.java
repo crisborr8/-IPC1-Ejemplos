@@ -15,6 +15,7 @@ public class NodoImagen {
     private ImageIcon imagen;
     private ImageIcon imager_reset;
     private NodoImagen siguiente;
+    private NodoImagen anterior;
 
     public NodoImagen getSiguiente() {
         return siguiente;
@@ -38,6 +39,14 @@ public class NodoImagen {
 
     public void setImager_reset(ImageIcon imager_reset) {
         this.imager_reset = imager_reset;
+    }
+
+    public NodoImagen getAnterior() {
+        return anterior;
+    }
+
+    public void setAnterior(NodoImagen anterior) {
+        this.anterior = anterior;
     }
     
     

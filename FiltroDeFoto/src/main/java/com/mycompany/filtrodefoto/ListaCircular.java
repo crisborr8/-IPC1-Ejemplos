@@ -19,21 +19,35 @@ public class ListaCircular {
             imagenActual.setImagen(nuevaImagen);
             imagenActual.setImager_reset(nuevaImagen);
             imagenActual.setSiguiente(imagenActual);
+            imagenActual.setAnterior(imagenActual);
             System.out.println("Imagen nueva insertada");
         } else {
             //insertamos luego de la imagen que estamos viendo
             NodoImagen nuevoNodo = new NodoImagen();
             nuevoNodo.setImagen(nuevaImagen);
             nuevoNodo.setImager_reset(nuevaImagen);
+            
             nuevoNodo.setSiguiente(imagenActual.getSiguiente());
+            nuevoNodo.setAnterior(imagenActual.getSiguiente().getAnterior());
+            
             imagenActual.setSiguiente(nuevoNodo);
+            nuevoNodo.getSiguiente().setAnterior(nuevoNodo);
+            
             imagenActual = imagenActual.getSiguiente();
         }
     }
     
-    public ImageIcon getImagenActual(){
+    public ImageIcon getImagenSiguiente(){
         if (imagenActual != null){
             imagenActual = imagenActual.getSiguiente();
+            return imagenActual.getImagen();
+        }
+        return null;
+    }
+    
+    public ImageIcon getImagenAnterior(){
+        if (imagenActual != null){
+            imagenActual = imagenActual.getAnterior();
             return imagenActual.getImagen();
         }
         return null;
