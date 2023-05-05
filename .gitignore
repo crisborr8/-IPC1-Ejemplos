@@ -15,3 +15,5 @@
 /ArchivosSwing/target/
 /EstructuraDeDatos/target/
 /FiltroDeFoto/target/
+venv/
+__pycache__/
